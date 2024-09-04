@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "coffee shop - oscar walsdorf"
+version = "3.9"
+description = "Making a database using coffee shop data"
+authors = ["Oscar Walsdorf <o.walsdorf@stpauls.school.nz>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+flask = "^3.0.3"
+db-sqlite3 = "^0.0.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

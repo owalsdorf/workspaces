@@ -1,0 +1,9 @@
+sudo apk add python3 python3-dev py3-pip libffi-dev
+sudo apk add poetry
+poetry init
+poetry config --local virtualenvs.in-project true
+poetry add Flask
+poetry add db-sqlite3
+
+poetry shell
+poetry install

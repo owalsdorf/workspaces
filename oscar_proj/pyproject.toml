@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "tihoi shop"
+version = "0.1.0"
+description = "Managing Gear data with an SQL Database"
+authors = ["Oscar Walsdorf <o.walsdorf@stpauls.school.nz>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+flask = "^3.0.3"
+db-sqlite3 = "^0.0.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
