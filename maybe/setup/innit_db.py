@@ -1,9 +1,9 @@
 import sqlite3;
 
 # Creates connection to the database
-with sqlite3.connect("maybe/assets/shopped_data.db") as conn:
+with sqlite3.connect("assets/shopped_data.db") as conn:
 	# Run our sql to initialise the database, using with_resources pattern
-	with open('maybe/setup/coffee.sql') as f:
+	with open('setup/coffee.sql') as f:
 		conn.executescript(f.read());
 
 	# Grab cursor

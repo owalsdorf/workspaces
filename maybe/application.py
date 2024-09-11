@@ -8,7 +8,7 @@ def get_db_connection():
 
     try:
         # Attempt to connect to the database
-        conn = sqlite3.connect("maybe/assets/shopped_data.db"); 
+        conn = sqlite3.connect("assets/shopped_data.db"); 
         print("---------------------------------------------------------------")
         print("[LOG] - Connected to database. Version", sqlite3.version); 
     # If there is no connection, print an error
@@ -25,20 +25,20 @@ def get_db_connection():
     conn.execute(sql);
     return conn
 
-def get_items():
+def get_items(sortvar, sortcolumn):
     # Establish connection to the database and grab the cursor
     conn = get_db_connection()
-    cur = conn.cursor()
-
+    sql = f"""
+    SELECT * FROM tbl_items ORDER BY {sortcolumn} {sortvar}
+    """
     # Fetching all content from tbl_items, filters, and filters_names
-    all_items = cur.execute('SELECT * FROM tbl_items').fetchall()
-    print("[LOG] - All items have been selected")
+    all_items = conn.execute(sql).fetchall()
+    print(f"[LOG] - Items have been sorted by {sortvar}")
     print("---------------------------------------------------------------")
-    cur.close()
-    
+    conn.close()
+
     return all_items
     
-
 
 app = Flask(__name__, static_url_path='/assets', static_folder='assets');
 
@@ -46,14 +46,25 @@ app = Flask(__name__, static_url_path='/assets', static_folder='assets');
 @app.route("/", methods=['GET','POST'])
 def index():
 
-    # Setting data to cat_description_get so that I can specify which table to reference in the base.html
-    data = get_items()
+    # Setting data to get_items() so that I can specify which table to reference in the base.html
+    sortcolumn = "id"
+    sortvar = "ASC"
+    data = get_items(sortvar, sortcolumn)
 
+    if request.method == 'POST':
+        action = request.form.get("action")
+
+        if action == 'getvariables':
+            print("[LOG] - Receiving post request to determine variables")
+            sortvar = request.form.get("sortMethod")
+            sortcolumn = request.form.get("sortColumn")
+            data = get_items(sortvar, sortcolumn)
+    
     # Processes base.html file using Jinja, and tables can be accessed using 'items', 'filters', and 'names'.
     return render_template("website.html", items=data);
 
 
 if __name__ == "__main__":
-	print("[LOG] - Single Page Application - Initialising")
+	print("[LOG] - Search engine - Initialising")
     # Initialise Debugger
-	app.run(debug=True);
+	app.run(debug=True, port=5050);

@@ -118,56 +118,78 @@
         <thead>
           <tr>
             <!-- All columns -->
-            <th scope="col">ID
-              <form method="POST">
-              <button type="submit" name="action" value="ascendingID" style="padding-top: 2px; padding-left: 6px; padding-right: 6px;"
-                class="btn btn-secondary">
-                <svg width="20" height="20" fill="white">
-                  <use xlink:href="#filter"/>
-                </svg>
-              </button>
+            <form method="POST">
+              <th scope="col">ID
+                <button type="submit" name="action" value="getvariables"
+                  style="padding-top: 2px; padding-left: 6px; padding-right: 6px;" class="btn btn-secondary">
+                  <input type="hidden" name="sortMethod" value="DESC">
+                  <input type="hidden" name="sortColumn" value="id">
+                  <svg width="20" height="20" fill="white">
+                    <use xlink:href="#filter" />
+                  </svg>
+                </button>
+              </th>
             </form>
-            </th>
-            <th scope="col">Sku
-              <button type="button" style="padding-top: 2px; padding-left: 6px; padding-right: 6px;"
-                class="btn btn-secondary">
-                <svg width="20" height="20" fill="white">
-                  <use xlink:href="#filter"/>
-                </svg>
-              </button>
-            </th>
-            <th scope="col">Name
-              <button type="button" style="padding-top: 2px; padding-left: 6px; padding-right: 6px;"
-                class="btn btn-secondary">
-                <svg width="20" height="20" fill="white">
-                  <use xlink:href="#filter"/>
-                </svg>
-              </button>
-            </th>
-            <th scope="col">Category
-              <button type="button" style="padding-top: 2px; padding-left: 6px; padding-right: 6px;"
-                class="btn btn-secondary">
-                <svg width="20" height="20" fill="white">
-                  <use xlink:href="#filter"/>
-                </svg>
-              </button>
-            </th>
-            <th scope="col">Drink Size
-              <button type="button" style="padding-top: 2px; padding-left: 6px; padding-right: 6px;"
-                class="btn btn-secondary">
-                <svg width="20" height="20" fill="white">
-                  <use xlink:href="#filter" />
-                </svg>
-              </button>
-            </th>
-            <th scope="col">Price
-              <button type="button" style="padding-top: 2px; padding-left: 6px; padding-right: 6px;"
-                class="btn btn-secondary">
-                <svg width="20" height="20" fill="white">
-                  <use xlink:href="#filter" />
-                </svg>
-              </button>
-            </th>
+            <form method="POST">
+              <th scope="col">Sku
+                <button type="submit" name="action" value="getvariables"
+                  style="padding-top: 2px; padding-left: 6px; padding-right: 6px;" class="btn btn-secondary">
+                  <input type="hidden" name="sortMethod" value="ASC">
+                  <input type="hidden" name="sortColumn" value="sku">
+                  <svg width="20" height="20" fill="white">
+                    <use xlink:href="#filter" />
+                  </svg>
+                </button>
+              </th>
+            </form>
+            <form method="POST">
+              <th scope="col">Name
+                <button type="submit" name="action" value="getvariables"
+                  style="padding-top: 2px; padding-left: 6px; padding-right: 6px;" class="btn btn-secondary">
+                  <input type="hidden" name="sortMethod" value="ASC">
+                  <input type="hidden" name="sortColumn" value="name">
+                  <svg width="20" height="20" fill="white">
+                    <use xlink:href="#filter" />
+                  </svg>
+                </button>
+              </th>
+            </form>
+            <form method="POST">
+              <th scope="col">Category
+                <button type="submit" name="action" value="getvariables"
+                  style="padding-top: 2px; padding-left: 6px; padding-right: 6px;" class="btn btn-secondary">
+                  <input type="hidden" name="sortMethod" value="ASC">
+                  <input type="hidden" name="sortColumn" value="cat">
+                  <svg width="20" height="20" fill="white">
+                    <use xlink:href="#filter" />
+                  </svg>
+                </button>
+              </th>
+            </form>
+            <form method="POST">
+              <th scope="col">Drink Size
+                <button type="submit" name="action" value="getvariables"
+                  style="padding-top: 2px; padding-left: 6px; padding-right: 6px;" class="btn btn-secondary">
+                  <input type="hidden" name="sortMethod" value="ASC">
+                  <input type="hidden" name="sortColumn" value="size">
+                  <svg width="20" height="20" fill="white">
+                    <use xlink:href="#filter" />
+                  </svg>
+                </button>
+              </th>
+            </form>
+            <form method="POST">
+              <th scope="col">Price
+                <button type="submit" name="action" value="getvariables"
+                  style="padding-top: 2px; padding-left: 6px; padding-right: 6px;" class="btn btn-secondary">
+                  <input type="hidden" name="sortMethod" value="ASC">
+                  <input type="hidden" name="sortColumn" value="price">
+                  <svg width="20" height="20" fill="white">
+                    <use xlink:href="#filter" />
+                  </svg>
+                </button>
+              </th>
+            </form>
           </tr>
         </thead>
         <tbody class="table-group-divider">
