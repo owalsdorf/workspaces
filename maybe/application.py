@@ -25,20 +25,32 @@ def get_db_connection():
     conn.execute(sql);
     return conn
 
+def base_table():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    sql = f"""
+    SELECT * FROM tbl_items """
+
+    all_items = cur.execute(sql).fetchall()
+
+    conn.close
+
+    return all_items
+
 def get_items(sortvar, sortcolumn):
     # Establish connection to the database and grab the cursor
     conn = get_db_connection()
+    cur = conn.cursor()
     sql = f"""
     SELECT * FROM tbl_items ORDER BY {sortcolumn} {sortvar}
     """
     # Fetching all content from tbl_items, filters, and filters_names
-    all_items = conn.execute(sql).fetchall()
+    changed_items = cur.execute(sql).fetchall()
     print(f"[LOG] - Items have been sorted by {sortvar}")
     print("---------------------------------------------------------------")
     conn.close()
 
-    return all_items
-    
+    return changed_items
 
 app = Flask(__name__, static_url_path='/assets', static_folder='assets');
 
@@ -49,19 +61,19 @@ def index():
     # Setting data to get_items() so that I can specify which table to reference in the base.html
     sortcolumn = "id"
     sortvar = "ASC"
-    data = get_items(sortvar, sortcolumn)
+    data = base_table()
 
     if request.method == 'POST':
         action = request.form.get("action")
 
-        if action == 'getvariables':
-            print("[LOG] - Receiving post request to determine variables")
+        if action == 'sorting':
+            print("[LOG] - Receiving post request to sort table")
             sortvar = request.form.get("sortMethod")
             sortcolumn = request.form.get("sortColumn")
             data = get_items(sortvar, sortcolumn)
     
     # Processes base.html file using Jinja, and tables can be accessed using 'items', 'filters', and 'names'.
-    return render_template("website.html", items=data);
+    return render_template("website.html", items=data, sortvar=sortvar, sortcolumn=sortcolumn);
 
 
 if __name__ == "__main__":

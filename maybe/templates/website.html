@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
-
+  
 <head>
   <script src="../assets/js/color-modes.js"></script>
 
@@ -108,88 +108,194 @@
 
   <main class="d-flex">
 
-
     <!-- Table bodies -->
     <div class="tab-content flex-grow-1 pt-2">
-      <h1 style="margin-left:50px; margin-top:30px; margin-bottom:-40px;">Items</h1>
+      <h1 style="margin-left:55px; margin-top:30px; margin-bottom:-40px;">Items</h1>
       <!-- Item Table -->
       <table class="thing table table-striped table-hover table-bordered align-middle"
         style="margin-left: 4%; margin-top: 50px; margin-bottom: 100px; width: 92%;">
         <thead>
           <tr>
             <!-- All columns -->
-            <form method="POST">
-              <th scope="col">ID
-                <button type="submit" name="action" value="getvariables"
-                  style="padding-top: 2px; padding-left: 6px; padding-right: 6px;" class="btn btn-secondary">
-                  <input type="hidden" name="sortMethod" value="DESC">
-                  <input type="hidden" name="sortColumn" value="id">
-                  <svg width="20" height="20" fill="white">
-                    <use xlink:href="#filter" />
-                  </svg>
-                </button>
+              <th scope="col">
+                <div class="d-flex align-items-center">
+                  ID
+                  <div class="dropdown ms-2">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Sort
+                    </button>
+                    <ul class="dropdown-menu">
+                  <form method="POST">
+                    <li>
+                      <button type="submit" name="action" value="sorting" class="dropdown-item">
+                        Descending
+                        <input type="hidden" name="sortMethod" value="DESC">
+                        <input type="hidden" name="sortColumn" value="id">
+                      </button>
+                    </li>
+                  </form>
+                  <form method="POST">
+                    <li>
+                      <button type="submit" name="action" value="sorting" class="dropdown-item">
+                        Ascending
+                        <input type="hidden" name="sortMethod" value="ASC">
+                        <input type="hidden" name="sortColumn" value="id">
+                      </button>
+                    </li>
+                  </form>
+                  </ul>
+                </div>
               </th>
-            </form>
-            <form method="POST">
-              <th scope="col">Sku
-                <button type="submit" name="action" value="getvariables"
-                  style="padding-top: 2px; padding-left: 6px; padding-right: 6px;" class="btn btn-secondary">
-                  <input type="hidden" name="sortMethod" value="ASC">
-                  <input type="hidden" name="sortColumn" value="sku">
-                  <svg width="20" height="20" fill="white">
-                    <use xlink:href="#filter" />
-                  </svg>
-                </button>
+
+              <th scope="col">
+                <div class="d-flex align-items-center">
+                  Sku
+                  <div class="dropdown ms-2">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Sort
+                    </button>
+                    <ul class="dropdown-menu">
+                  <form method="POST">
+                    <li>
+                      <button type="submit" name="action" value="sorting" class="dropdown-item">
+                        Descending
+                        <input type="hidden" name="sortMethod" value="DESC">
+                        <input type="hidden" name="sortColumn" value="sku">
+                      </button>
+                    </li>
+                  </form>
+                  <form method="POST">
+                    <li>
+                      <button type="submit" name="action" value="sorting" class="dropdown-item">
+                        Ascending
+                        <input type="hidden" name="sortMethod" value="ASC">
+                        <input type="hidden" name="sortColumn" value="sku">
+                      </button>
+                    </li>
+                  </form>
+                  </ul>
+                </div>
               </th>
-            </form>
-            <form method="POST">
-              <th scope="col">Name
-                <button type="submit" name="action" value="getvariables"
-                  style="padding-top: 2px; padding-left: 6px; padding-right: 6px;" class="btn btn-secondary">
-                  <input type="hidden" name="sortMethod" value="ASC">
-                  <input type="hidden" name="sortColumn" value="name">
-                  <svg width="20" height="20" fill="white">
-                    <use xlink:href="#filter" />
-                  </svg>
-                </button>
+            
+             <th scope="col">
+                <div class="d-flex align-items-center">
+                  Name
+                  <div class="dropdown ms-2">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Sort
+                    </button>
+                    <ul class="dropdown-menu">
+                  <form method="POST">
+                    <li>
+                      <button type="submit" name="action" value="sorting" class="dropdown-item">
+                        Descending
+                        <input type="hidden" name="sortMethod" value="DESC">
+                        <input type="hidden" name="sortColumn" value="name">
+                      </button>
+                    </li>
+                  </form>
+                  <form method="POST">
+                    <li>
+                      <button type="submit" name="action" value="sorting" class="dropdown-item">
+                        Ascending
+                        <input type="hidden" name="sortMethod" value="ASC">
+                        <input type="hidden" name="sortColumn" value="name">
+                      </button>
+                    </li>
+                  </form>
+                  </ul>
+                </div>
               </th>
-            </form>
-            <form method="POST">
-              <th scope="col">Category
-                <button type="submit" name="action" value="getvariables"
-                  style="padding-top: 2px; padding-left: 6px; padding-right: 6px;" class="btn btn-secondary">
-                  <input type="hidden" name="sortMethod" value="ASC">
-                  <input type="hidden" name="sortColumn" value="cat">
-                  <svg width="20" height="20" fill="white">
-                    <use xlink:href="#filter" />
-                  </svg>
-                </button>
+
+             <th scope="col">
+                <div class="d-flex align-items-center">
+                  Category
+                  <div class="dropdown ms-2">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Sort
+                    </button>
+                    <ul class="dropdown-menu">
+                  <form method="POST">
+                    <li>
+                      <button type="submit" name="action" value="sorting" class="dropdown-item">
+                        Descending
+                        <input type="hidden" name="sortMethod" value="DESC">
+                        <input type="hidden" name="sortColumn" value="cat">
+                      </button>
+                    </li>
+                  </form>
+                  <form method="POST">
+                    <li>
+                      <button type="submit" name="action" value="sorting" class="dropdown-item">
+                        Ascending
+                        <input type="hidden" name="sortMethod" value="ASC">
+                        <input type="hidden" name="sortColumn" value="cat">
+                      </button>
+                    </li>
+                  </form>
+                  </ul>
+                </div>
               </th>
-            </form>
-            <form method="POST">
-              <th scope="col">Drink Size
-                <button type="submit" name="action" value="getvariables"
-                  style="padding-top: 2px; padding-left: 6px; padding-right: 6px;" class="btn btn-secondary">
-                  <input type="hidden" name="sortMethod" value="ASC">
-                  <input type="hidden" name="sortColumn" value="size">
-                  <svg width="20" height="20" fill="white">
-                    <use xlink:href="#filter" />
-                  </svg>
-                </button>
+
+              <th scope="col">
+                <div class="d-flex align-items-center">
+                  Drink Size
+                  <div class="dropdown ms-2">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Sort
+                    </button>
+                    <ul class="dropdown-menu">
+                  <form method="POST">
+                    <li>
+                      <button type="submit" name="action" value="sorting" class="dropdown-item">
+                        Descending
+                        <input type="hidden" name="sortMethod" value="DESC">
+                        <input type="hidden" name="sortColumn" value="size">
+                      </button>
+                    </li>
+                  </form>
+                  <form method="POST">
+                    <li>
+                      <button type="submit" name="action" value="sorting" class="dropdown-item">
+                        Ascending
+                        <input type="hidden" name="sortMethod" value="ASC">
+                        <input type="hidden" name="sortColumn" value="size">
+                      </button>
+                    </li>
+                  </form>
+                  </ul>
+                </div>
               </th>
-            </form>
-            <form method="POST">
-              <th scope="col">Price
-                <button type="submit" name="action" value="getvariables"
-                  style="padding-top: 2px; padding-left: 6px; padding-right: 6px;" class="btn btn-secondary">
-                  <input type="hidden" name="sortMethod" value="ASC">
-                  <input type="hidden" name="sortColumn" value="price">
-                  <svg width="20" height="20" fill="white">
-                    <use xlink:href="#filter" />
-                  </svg>
-                </button>
+
+              <th scope="col">
+                <div class="d-flex align-items-center">
+                  Price
+                  <div class="dropdown ms-2">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Sort
+                    </button>
+                    <ul class="dropdown-menu">
+                  <form method="POST">
+                    <li>
+                      <button type="submit" name="action" value="sorting" class="dropdown-item">
+                        Descending
+                        <input type="hidden" name="sortMethod" value="DESC">
+                        <input type="hidden" name="sortColumn" value="price">
+                      </button>
+                    </li>
+                  </form>
+                  <form method="POST">
+                    <li>
+                      <button type="submit" name="action" value="sorting" class="dropdown-item">
+                        Ascending
+                        <input type="hidden" name="sortMethod" value="ASC">
+                        <input type="hidden" name="sortColumn" value="price">
+                      </button>
+                    </li>
+                  </form>
+                  </ul>
+                </div>
               </th>
-            </form>
           </tr>
         </thead>
         <tbody class="table-group-divider">
