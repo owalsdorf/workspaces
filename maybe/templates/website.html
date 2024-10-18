@@ -110,13 +110,19 @@
 
     <!-- Table bodies -->
     <div class="tab-content flex-grow-1 pt-2">
-      <h1 style="margin-left:55px; margin-top:30px; margin-bottom:-40px;">Items</h1>
+      <h1 class="mx-5 my-3">Items</h1> 
+      <form method="POST">
+        <input type="text" name="search" placeholder="Search..." class="form-control mx-5 w-25">
+        <input type="hidden" name="action" value="searching">
+        <button type="submit" style="display: none;"></button>
+      </form>
+
       <!-- Item Table -->
-      <table class="thing table table-striped table-hover table-bordered align-middle"
-        style="margin-left: 4%; margin-top: 50px; margin-bottom: 100px; width: 92%;">
+      <table class="thing table table-striped table-hover table-bordered align-middle mx-5 my-4" style="width: 93%;">
         <thead>
           <tr>
             <!-- All columns -->
+              <!-- Id -->
               <th scope="col">
                 <div class="d-flex align-items-center">
                   ID
@@ -146,7 +152,7 @@
                   </ul>
                 </div>
               </th>
-
+              <!-- Sku -->
               <th scope="col">
                 <div class="d-flex align-items-center">
                   Sku
@@ -176,7 +182,7 @@
                   </ul>
                 </div>
               </th>
-            
+              <!-- Name -->
              <th scope="col">
                 <div class="d-flex align-items-center">
                   Name
@@ -206,7 +212,7 @@
                   </ul>
                 </div>
               </th>
-
+              <!-- Category -->
              <th scope="col">
                 <div class="d-flex align-items-center">
                   Category
@@ -236,7 +242,7 @@
                   </ul>
                 </div>
               </th>
-
+              <!-- Size -->
               <th scope="col">
                 <div class="d-flex align-items-center">
                   Drink Size
@@ -266,7 +272,7 @@
                   </ul>
                 </div>
               </th>
-
+              <!-- Price -->
               <th scope="col">
                 <div class="d-flex align-items-center">
                   Price
