@@ -108,41 +108,45 @@
 
   <main class="d-flex">
 
-    <!-- Table bodies -->
     <div class="tab-content flex-grow-1 pt-2">
       <h1 class="mx-5 my-3">Coffee Shop Database</h1>
       
-      <!-- Container for search bar and checkboxes -->
       <div class="d-flex align-items-center mx-5 my-2">
-          <!-- Search Form -->
           <form method="POST" class="me-3">
-              <input type="text" name="search" placeholder="Search..." class="form-control" style="width: 400px; margin-right: 50px;">
+              <input type="text" name="search" placeholder="Search..." class="form-control" style="width: 400px; margin-right: 50px;" value="{{ request.form.get('search', '') }}">
               <input type="hidden" name="action" value="searching">
+              <input type="hidden" name="sortMethod" value="{{ request.form.get('sortMethod', 'ASC') }}">
+              <input type="hidden" name="sortColumn" value="{{ request.form.get('sortColumn', 'id') }}">
+              {% for column in columns %}
+                  <input type="hidden" name="columns" value="{{ column }}">
+              {% endfor %}
               <button type="submit" style="display: none;"></button>
           </form>
           
-          <!-- Checkbox Form -->
           <form method="POST" class="d-flex align-items-center">
             <h4 class="mx-3 mt-1">Toggle Columns:</h4>
               <label class="me-3">
-                  <input type="checkbox" name="columns" value="id" checked> ID
+                  <input type="checkbox" name="columns" value="id" {% if 'id' in columns %} checked {% endif %}> ID
               </label>
               <label class="me-3">
-                  <input type="checkbox" name="columns" value="sku" checked> SKU
+                  <input type="checkbox" name="columns" value="sku" {% if 'sku' in columns %} checked {% endif %}> SKU
               </label>
               <label class="me-3">
-                  <input type="checkbox" name="columns" value="name" checked> Name
+                  <input type="checkbox" name="columns" value="name" {% if 'name' in columns %} checked {% endif %}> Name
               </label>
               <label class="me-3">
-                  <input type="checkbox" name="columns" value="cat" checked> Category
+                  <input type="checkbox" name="columns" value="cat" {% if 'cat' in columns %} checked {% endif %}> Category
               </label>
               <label class="me-3">
-                  <input type="checkbox" name="columns" value="size" checked> Drink Size
+                  <input type="checkbox" name="columns" value="size" {% if 'size' in columns %} checked {% endif %}> Drink Size
               </label>
               <label class="me-3">
-                  <input type="checkbox" name="columns" value="price" checked> Price
+                  <input type="checkbox" name="columns" value="price" {% if 'price' in columns %} checked {% endif %}> Price
               </label>
               <input type="hidden" name="action" value="filtering">
+              <input type="hidden" name="search" value="{{ request.form.get('search', '') }}">
+              <input type="hidden" name="sortMethod" value="{{ request.form.get('sortMethod', 'ASC') }}">
+              <input type="hidden" name="sortColumn" value="{{ request.form.get('sortColumn', 'id') }}">
               <button type="submit" class="btn btn-primary ms-2">Update Columns</button>
           </form>
       </div>
@@ -151,7 +155,6 @@
       <table class="thing table table-striped table-hover table-bordered align-middle mx-5 my-4" style="width: 93%;">
           <thead>
               <tr>
-                  <!-- Dynamically render columns based on backend 'columns' list -->
                   {% for c in columns %}
                       <th scope="col">
                           <div class="d-flex align-items-center" style="font-size: 15px;">
@@ -168,6 +171,10 @@
                                                   Descending
                                                   <input type="hidden" name="sortMethod" value="DESC">
                                                   <input type="hidden" name="sortColumn" value="{{ c }}">
+                                                  <input type="hidden" name="search" value="{{ request.form.get('search', '') }}">
+                                                  {% for column in columns %}
+                                                      <input type="hidden" name="columns" value="{{ column }}">
+                                                  {% endfor %}
                                               </button>
                                           </li>
                                       </form>
@@ -177,6 +184,10 @@
                                                   Ascending
                                                   <input type="hidden" name="sortMethod" value="ASC">
                                                   <input type="hidden" name="sortColumn" value="{{ c }}">
+                                                  <input type="hidden" name="search" value="{{ request.form.get('search', '') }}">
+                                                  {% for column in columns %}
+                                                      <input type="hidden" name="columns" value="{{ column }}">
+                                                  {% endfor %}
                                               </button>
                                           </li>
                                       </form>
@@ -188,7 +199,6 @@
               </tr>
           </thead>
           <tbody class="table-group-divider">
-              <!-- Dynamically render row values based on 'columns' list -->
               {% for row in items %}
               <tr>
                   {% for c in columns %}
@@ -198,7 +208,8 @@
               {% endfor %}
           </tbody>
       </table>
-  </div>
+    </div>
+    
   
   </main>
 
