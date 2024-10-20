@@ -54,9 +54,8 @@ def get_items(columns, searchinput, sortvar, sortcolumn):
 app = Flask(__name__, static_url_path='/assets', static_folder='assets');
 
 # Allows for a GET request if needed - but not used
-@app.route("/", methods=['GET','POST'])
+@app.route("/", methods=['GET', 'POST'])
 def index():
-
     # Default values
     sortcolumn = 'id'
     sortvar = 'ASC'
@@ -67,21 +66,32 @@ def index():
     if request.method == 'POST':
         print("[LOG] - POST request detected")
         action = request.form.get("action")
+        print(f"[LOG] - Action type received: {action}")
         searchinput = request.form.get("search", "")
         sortvar = request.form.get("sortMethod", "ASC")
         sortcolumn = request.form.get("sortColumn", "id")
         columns = request.form.getlist("columns")
-        
+
         # Ensure columns aren't empty
         if not columns:
+            print(f"[LOG] - Columns are set to all off; preventing blank table")
             columns = ['id', 'sku', 'name', 'cat', 'size', 'price']
 
-        if action in ['filtering', 'sorting', 'searching']:
+        if action == 'reset':
+            print("[LOG] - Restoring to default settings.")
+            sortcolumn = 'id'
+            sortvar = 'ASC'
+            searchinput = ''
+            columns = ['id', 'sku', 'name', 'cat', 'size', 'price']
             data = get_items(columns, searchinput, sortvar, sortcolumn)
-        
+
+        elif action in ['filtering', 'sorting', 'searching']:
+            data = get_items(columns, searchinput, sortvar, sortcolumn)
+
         print(f"[LOG] - Action: {action}, Search: {searchinput}, Sort: {sortvar}, Sort Column: {sortcolumn}, Columns: {columns}")
 
     return render_template("website.html", items=data, columns=columns)
+
 
 if __name__ == "__main__":
   print("[LOG] - Search engine - Initialising")

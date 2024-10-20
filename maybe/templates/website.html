@@ -113,7 +113,7 @@
       
       <div class="d-flex align-items-center mx-5 my-2">
           <form method="POST" class="me-3">
-              <input type="text" name="search" placeholder="Search..." class="form-control" style="width: 400px; margin-right: 50px;" value="{{ request.form.get('search', '') }}">
+              <input type="text" name="search" placeholder="Search..." class="form-control" style="width: 250px; margin-right: 50px;" value="{{ request.form.get('search', '') }}">
               <input type="hidden" name="action" value="searching">
               <input type="hidden" name="sortMethod" value="{{ request.form.get('sortMethod', 'ASC') }}">
               <input type="hidden" name="sortColumn" value="{{ request.form.get('sortColumn', 'id') }}">
@@ -148,7 +148,12 @@
               <input type="hidden" name="sortMethod" value="{{ request.form.get('sortMethod', 'ASC') }}">
               <input type="hidden" name="sortColumn" value="{{ request.form.get('sortColumn', 'id') }}">
               <button type="submit" class="btn btn-primary ms-2">Update Columns</button>
+              
           </form>
+          <form method="POST">
+            <input type="hidden" name="action" value="reset">
+            <button type="submit" class="btn btn-secondary ms-3">Restore Defaults</button>
+        </form>
       </div>
       
       <!-- Item Table -->
