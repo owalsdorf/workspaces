@@ -29,9 +29,10 @@ def get_items(columns, searchinput, sortvar, sortcolumn):
   # Establish connection to the database and grab the cursor
   conn = get_db_connection()
   cur = conn.cursor()
+  # Rewrite the string list to remove the apostrophes so that it can work in the SQL function
   sqlcolumns = ", ".join(columns)
   print("[LOG] - Attempting to execute SQL function")
-
+    # Each function is put into place in the SQL code
   sql = f"""
   SELECT {sqlcolumns} FROM tbl_items
   WHERE (id LIKE '%{searchinput}%'
@@ -42,7 +43,7 @@ def get_items(columns, searchinput, sortvar, sortcolumn):
   OR price LIKE '%{searchinput}%')
   ORDER BY {sortcolumn} {sortvar}
   """
-  # Fetching all content from tbl_items, filters, and filters_names
+  # Execute the SQL code and update the table
   changed_table = cur.execute(sql).fetchall()
   print(f"[LOG] - Table has been updated. Sort type: {sortvar}, column sorted: {sortcolumn}, search input: {searchinput}.")
   print(f"[LOG] - Columns selected: {sqlcolumns}.")
@@ -56,35 +57,43 @@ app = Flask(__name__, static_url_path='/assets', static_folder='assets');
 # Allows for a GET request if needed - but not used
 @app.route("/", methods=['GET', 'POST'])
 def index():
-    # Default values
+    # Default values for when the page initially loads
     sortcolumn = 'id'
     sortvar = 'ASC'
     searchinput = ''
     columns = ['id', 'sku', 'name', 'cat', 'size', 'price']
+    # Execute this function when the page first loads without an action so that there is a table
     data = get_items(columns, searchinput, sortvar, sortcolumn)
 
     if request.method == 'POST':
         print("[LOG] - POST request detected")
+        # Find which type of action has been chosed
         action = request.form.get("action")
         print(f"[LOG] - Action type received: {action}")
+        # Find values for all variables. Ones that do not have any values are assigned the next one over.
+        # E.g if there is no value for sortMethod, sortMethod = ASC.
         searchinput = request.form.get("search", "")
         sortvar = request.form.get("sortMethod", "ASC")
         sortcolumn = request.form.get("sortColumn", "id")
+        # Get the columns in a list
         columns = request.form.getlist("columns")
 
-        # Ensure columns aren't empty
+        # Ensure columns aren't empty. If they are, restore the default value
         if not columns:
             print(f"[LOG] - Columns are set to all off; preventing blank table")
             columns = ['id', 'sku', 'name', 'cat', 'size', 'price']
 
+        # If the user decides to hit the reset button:
         if action == 'reset':
             print("[LOG] - Restoring to default settings.")
+            # All values are restored to the aforementioned default values
             sortcolumn = 'id'
             sortvar = 'ASC'
             searchinput = ''
             columns = ['id', 'sku', 'name', 'cat', 'size', 'price']
             data = get_items(columns, searchinput, sortvar, sortcolumn)
 
+        # For all other action types, execute function get_items().
         elif action in ['filtering', 'sorting', 'searching']:
             data = get_items(columns, searchinput, sortvar, sortcolumn)
 

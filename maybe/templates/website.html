@@ -112,20 +112,27 @@
       <h1 class="mx-5 my-3">Coffee Shop Database</h1>
       
       <div class="d-flex align-items-center mx-5 my-2">
+        <!-- Add the search bar -->
           <form method="POST" class="me-3">
+            <!-- It has a value that depends on what the previous search value was. If the previous value was nothing, this value is equal to '' -->
               <input type="text" name="search" placeholder="Search..." class="form-control" style="width: 250px; margin-right: 50px;" value="{{ request.form.get('search', '') }}">
+              <!-- Hidden values for all four functions allow function stacking -->
               <input type="hidden" name="action" value="searching">
               <input type="hidden" name="sortMethod" value="{{ request.form.get('sortMethod', 'ASC') }}">
               <input type="hidden" name="sortColumn" value="{{ request.form.get('sortColumn', 'id') }}">
-              {% for column in columns %}
-                  <input type="hidden" name="columns" value="{{ column }}">
+              {% for c in columns %}
+                  <input type="hidden" name="columns" value="{{ c }}">
               {% endfor %}
               <button type="submit" style="display: none;"></button>
           </form>
           
           <form method="POST" class="d-flex align-items-center">
+            <!-- Title for clarity -->
             <h4 class="mx-3 mt-1">Toggle Columns:</h4>
               <label class="me-3">
+                <!-- Every checkbox has an individual value -->
+                <!-- Has deterministic code to see if the checkbox should be checked or unchecked upon loading -->
+                <!-- For ID, if 'id' is in the string for columns, check the box. If not, uncheck it. -->
                   <input type="checkbox" name="columns" value="id" {% if 'id' in columns %} checked {% endif %}> ID
               </label>
               <label class="me-3">
@@ -143,6 +150,7 @@
               <label class="me-3">
                   <input type="checkbox" name="columns" value="price" {% if 'price' in columns %} checked {% endif %}> Price
               </label>
+              <!-- Hidden values for function stacking -->
               <input type="hidden" name="action" value="filtering">
               <input type="hidden" name="search" value="{{ request.form.get('search', '') }}">
               <input type="hidden" name="sortMethod" value="{{ request.form.get('sortMethod', 'ASC') }}">
@@ -150,6 +158,8 @@
               <button type="submit" class="btn btn-primary ms-2">Update Columns</button>
               
           </form>
+
+          <!-- Restore defaults button. No function stackng required. -->
           <form method="POST">
             <input type="hidden" name="action" value="reset">
             <button type="submit" class="btn btn-secondary ms-3">Restore Defaults</button>
@@ -163,8 +173,11 @@
                   {% for c in columns %}
                       <th scope="col">
                           <div class="d-flex align-items-center" style="font-size: 15px;">
+                            <!-- Headers of each column -->
+                            <!-- The '| title' ensures that the first letter of each title is capitalised  -->
                               {{ c | title }}
                               <div class="dropdown ms-2">
+                                <!-- Sort dropdown -->
                                   <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                                       aria-expanded="false" style="font-size: 13px;">
                                       Sort
@@ -172,13 +185,15 @@
                                   <ul class="dropdown-menu">
                                       <form method="POST">
                                           <li>
+                                            <!-- Inside the dropdown menu, has two types of sort method. Descending or ascending -->
+                                            <!-- Both sorts have hidden values for function stacking. The only difference is the value of sortMethod. -->
                                               <button type="submit" name="action" value="sorting" class="dropdown-item" style="font-size: 13px;">
                                                   Descending
                                                   <input type="hidden" name="sortMethod" value="DESC">
                                                   <input type="hidden" name="sortColumn" value="{{ c }}">
                                                   <input type="hidden" name="search" value="{{ request.form.get('search', '') }}">
-                                                  {% for column in columns %}
-                                                      <input type="hidden" name="columns" value="{{ column }}">
+                                                  {% for c in columns %}
+                                                      <input type="hidden" name="columns" value="{{ c }}">
                                                   {% endfor %}
                                               </button>
                                           </li>
@@ -190,8 +205,8 @@
                                                   <input type="hidden" name="sortMethod" value="ASC">
                                                   <input type="hidden" name="sortColumn" value="{{ c }}">
                                                   <input type="hidden" name="search" value="{{ request.form.get('search', '') }}">
-                                                  {% for column in columns %}
-                                                      <input type="hidden" name="columns" value="{{ column }}">
+                                                  {% for c in columns %}
+                                                      <input type="hidden" name="columns" value="{{ c }}">
                                                   {% endfor %}
                                               </button>
                                           </li>
@@ -204,9 +219,11 @@
               </tr>
           </thead>
           <tbody class="table-group-divider">
+            <!-- Cycle through each item and display the corresponding field -->
               {% for row in items %}
               <tr>
                   {% for c in columns %}
+                  <!-- row[c] means that the table goes field by field based off of which column it is - determined by c -->
                       <td style="font-size: 13px;">{{ row[c] }}</td>
                   {% endfor %}
               </tr>
