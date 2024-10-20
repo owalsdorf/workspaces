@@ -142,7 +142,7 @@
                   <input type="checkbox" name="columns" value="price" checked> Price
               </label>
               <input type="hidden" name="action" value="filtering">
-              <button type="submit" class="btn btn-primary ms-2">Save Changes</button>
+              <button type="submit" class="btn btn-primary ms-2">Update Columns</button>
           </form>
       </div>
       
@@ -153,17 +153,17 @@
                   <!-- Dynamically render columns based on backend 'columns' list -->
                   {% for c in columns %}
                       <th scope="col">
-                          <div class="d-flex align-items-center">
-                              {{ c }}
+                          <div class="d-flex align-items-center" style="font-size: 15px;">
+                              {{ c | title }}
                               <div class="dropdown ms-2">
                                   <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                      aria-expanded="false">
+                                      aria-expanded="false" style="font-size: 13px;">
                                       Sort
                                   </button>
                                   <ul class="dropdown-menu">
                                       <form method="POST">
                                           <li>
-                                              <button type="submit" name="action" value="sorting" class="dropdown-item">
+                                              <button type="submit" name="action" value="sorting" class="dropdown-item" style="font-size: 13px;">
                                                   Descending
                                                   <input type="hidden" name="sortMethod" value="DESC">
                                                   <input type="hidden" name="sortColumn" value="{{ c }}">
@@ -172,7 +172,7 @@
                                       </form>
                                       <form method="POST">
                                           <li>
-                                              <button type="submit" name="action" value="sorting" class="dropdown-item">
+                                              <button type="submit" name="action" value="sorting" class="dropdown-item" style="font-size: 13px;">
                                                   Ascending
                                                   <input type="hidden" name="sortMethod" value="ASC">
                                                   <input type="hidden" name="sortColumn" value="{{ c }}">
@@ -191,7 +191,7 @@
               {% for row in items %}
               <tr>
                   {% for c in columns %}
-                      <td>{{ row[c] }}</td>
+                      <td style="font-size: 13px;">{{ row[c] }}</td>
                   {% endfor %}
               </tr>
               {% endfor %}
